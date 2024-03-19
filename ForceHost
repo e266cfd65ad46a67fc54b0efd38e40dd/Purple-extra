@@ -1,0 +1,24 @@
+runFunction(function()
+    local player = game.Players.LocalPlayer
+    local role = player:GetAttribute('CustomMatchRole')
+    local ForceMatchHost = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api.CreateOptionsButton({
+        Name = 'Force Host',
+        Function = function(callback)
+            if callback then
+                if role == 'player' then
+                    warn('Host Forced...')
+                    player:SetAttribute('CustomMatchRole', 'host')
+                
+                    local args = {
+                        [1] = "BE7802A7-E46B-4B7C-A66B-E5B710AE1685",
+                        [2] = {}
+                    }
+                
+                    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("CustomMatches/RestartCustomMatch"):FireServer(unpack(args))
+                else
+                    warn('Host Force Failed, Rejoin...')
+                end
+            end
+        end
+    })
+end)
