@@ -1,0 +1,9 @@
+local function CSTC()
+    local consoleOutput = ""
+    for _, message in ipairs(game:GetService("LogService"):GetLogHistory()) do
+        consoleOutput = consoleOutput .. message.message .. "\n" 
+    end
+    setclipboard(consoleOutput)
+end
+
+CSTC()
