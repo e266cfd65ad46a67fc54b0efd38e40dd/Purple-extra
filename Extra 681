@@ -82,16 +82,8 @@ local function UpdateButtonPosition()
 end
 
 spawn(UpdateButtonPosition)
+button.Visible = true
 
-local UserInputService = game:GetService("UserInputService")
-if not game:GetService("UserInputService").KeyboardEnabled then
-    button.Visible = true
-else
-    button.Visible = false
-end
-
-button.MouseButton1Click:Connect(
-    function()
-        PressL()
-    end
-)
+button.MouseButton1Click:Connect(function()
+    PressL()
+end)
