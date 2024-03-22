@@ -1,0 +1,87 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local squareSize = Vector3.new(5, 0.1, 5)
+local squareColor = Color3.fromRGB(128, 0, 128)
+local boxSize = Vector3.new(5, 0.1, 5)
+local boxColor = Color3.fromRGB(0, 128, 128)
+
+local square = Instance.new("Part")
+square.Size = squareSize
+square.Color = squareColor
+square.Anchored = true
+square.CanCollide = true
+square.Parent = game.Workspace
+
+local surface1 = Instance.new("SurfaceGui")
+surface1.Parent = square
+
+local frame1 = Instance.new("Frame")
+frame1.Size = UDim2.new(1, 0, 1, 0)
+frame1.BackgroundColor3 = squareColor
+frame1.BorderSizePixel = 0
+frame1.Parent = surface1
+
+local box = Instance.new("Part")
+box.Size = boxSize
+box.Color = boxColor
+box.Anchored = true
+box.CanCollide = true
+box.Parent = game.Workspace
+
+local surface2 = Instance.new("SurfaceGui")
+surface2.Parent = box
+
+local frame2 = Instance.new("Frame")
+frame2.Size = UDim2.new(1, 0, 1, 0)
+frame2.BackgroundColor3 = boxColor
+frame2.BorderSizePixel = 0
+frame2.Parent = surface2
+
+local function up()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    humanoidRootPart.CFrame = CFrame.new(humanoidRootPart.Position + Vector3.new(0, 0, 0)) + humanoidRootPart.CFrame.LookVector * 6
+end
+
+up()
+
+local function addremove()
+    square:Destroy()
+    box:Destroy()
+end
+
+local function updatepos()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    local offset = Vector3.new(0, humanoidRootPart.Size.Y * 1.1 - -0.8, 0)
+    local boxoffset = Vector3.new(0, humanoidRootPart.Size.Y * 1.1 - -0.6, 0)
+    local yOffset = math.sin(tick() * 5) * 0.15
+
+    square.CFrame = CFrame.new(humanoidRootPart.Position - offset + Vector3.new(0, yOffset, 0))
+    box.CFrame = CFrame.new(humanoidRootPart.Position + boxoffset + Vector3.new(0, yOffset, 0))
+end
+
+character.HumanoidRootPart:GetPropertyChangedSignal("Position"):Connect(updatepos)
+local humanoid = character:WaitForChild("Humanoid")
+updatepos()
+
+local function jumpbypass(duration, times)
+    for i = 1, times do
+        humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+        wait(duration)
+        humanoid:Move(Vector3.new(0, -9e9, 0))
+    end
+end
+
+jumpbypass(0, 60)
+
+addremove()
+
+game.Workspace.Gravity = 10000
+wait(0.2)
+game.Workspace.Gravity = 186
+
+local function up2()
+    local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+    humanoidRootPart.CFrame = CFrame.new(humanoidRootPart.Position + Vector3.new(0, 10, 0)) + humanoidRootPart.CFrame.LookVector * -1
+end
+up2()
