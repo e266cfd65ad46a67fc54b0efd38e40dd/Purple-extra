@@ -59,6 +59,7 @@ local player = game.Players.LocalPlayer
 local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.Parent = player.PlayerGui
+ScreenGui.ResetOnSpawn = false
 
 local button = Instance.new("TextButton")
 button.Text = "Gui"
