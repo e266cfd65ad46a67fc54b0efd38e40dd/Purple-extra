@@ -23,6 +23,7 @@ end
 
 local workspace = game:GetService("Workspace")
 local spectatorPlatform = workspace:FindFirstChild("SpectatorPlatform")
+local clouds = workspace:FindFirstChild("Clouds")
 if spectatorPlatform then
     local credits = spectatorPlatform:FindFirstChild("Credits")
     if credits then
@@ -42,6 +43,9 @@ if spectatorPlatform then
 			end
 		end
 	end
+end
+if clouds then
+    clouds:Destroy()
 end
 
 local vim = game:GetService("VirtualInputManager")
