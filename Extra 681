@@ -59,7 +59,6 @@ local player = game.Players.LocalPlayer
 local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.Parent = player.PlayerGui
-ScreenGui.ResetOnSpawn = false
 
 local button = Instance.new("TextButton")
 button.Text = "Gui"
@@ -97,6 +96,7 @@ local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
 local UIGradient = Instance.new("UIGradient")
+ScreenGui.ResetOnSpawn = false
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Frame.Parent = ScreenGui
