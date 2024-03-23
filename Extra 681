@@ -91,3 +91,143 @@ button.Visible = true
 button.MouseButton1Click:Connect(function()
     PressL()
 end)
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local UIGradient = Instance.new("UIGradient")
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Frame.BackgroundTransparency = 1.000
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Position = UDim2.new(0, 0, 0, 0)
+Frame.Size = UDim2.new(0, 380, 0, 35)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(72, 0, 135)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0, 10, 0, 0)
+TextLabel.Size = UDim2.new(0, 360, 0, 35)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "Purple theme v-1.7 / discord.gg/MSPQHFhqxd"
+TextLabel.TextColor3 = Color3.fromRGB(72, 0, 135)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 24.000
+TextLabel.TextWrapped = true
+
+local function createOutline(frame, thickness, startColor, endColor)
+    local steps = 100
+    for i = 1, steps do
+        local color = startColor:Lerp(endColor, i / steps)
+
+        local outlineTop = Instance.new("Frame")
+        outlineTop.BorderSizePixel = 0
+        outlineTop.Size = UDim2.new(1, 0, 0, thickness)
+        outlineTop.BackgroundColor3 = color
+        outlineTop.Position = UDim2.new(0, 0, 0, -thickness)
+        outlineTop.Parent = frame
+        local outlineTopGradient = UIGradient:Clone()
+        outlineTopGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineTopGradient.Parent = outlineTop
+
+        local outlineTop = Instance.new("Frame")
+        outlineTop.BorderSizePixel = 0
+        outlineTop.Size = UDim2.new(1, 0, 0, thickness)
+        outlineTop.BackgroundColor3 = color
+        outlineTop.Position = UDim2.new(0, 0, 0, -thickness)
+        outlineTop.Parent = frame
+        local outlineTopGradient = UIGradient:Clone()
+        outlineTopGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineTopGradient.Parent = outlineTop
+
+        local outlineBottom = outlineTop:Clone()
+        outlineBottom.Position = UDim2.new(0, 0, 1, 0)
+        outlineBottom.Parent = frame
+        local outlineBottomGradient = UIGradient:Clone()
+        outlineBottomGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineBottomGradient.Parent = outlineBottom
+
+        local outlineLeft = outlineTop:Clone()
+        outlineLeft.Size = UDim2.new(0, thickness, 1, 0)
+        outlineLeft.Position = UDim2.new(0, -thickness, 0, 0)
+        outlineLeft.Parent = frame
+        local outlineLeftGradient = UIGradient:Clone()
+        outlineLeftGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineLeftGradient.Parent = outlineLeft
+
+        local outlineRight = outlineLeft:Clone()
+        outlineRight.Position = UDim2.new(1, 0, 0, 0)
+        outlineRight.Parent = frame
+        local outlineRightGradient = UIGradient:Clone()
+        outlineRightGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineRightGradient.Parent = outlineRight
+
+        local cornerTopLeft = outlineTop:Clone()
+        cornerTopLeft.Size = UDim2.new(0, thickness, 0, thickness)
+        cornerTopLeft.Position = UDim2.new(0, -thickness, 0, -thickness)
+        cornerTopLeft.Parent = frame
+        local cornerTopLeftGradient = UIGradient:Clone()
+        cornerTopLeftGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        cornerTopLeftGradient.Parent = cornerTopLeft
+
+        local cornerTopRight = cornerTopLeft:Clone()
+        cornerTopRight.Position = UDim2.new(1, 0, 0, -thickness)
+        cornerTopRight.Parent = frame
+        local cornerTopRightGradient = UIGradient:Clone()
+        cornerTopRightGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        cornerTopRightGradient.Parent = cornerTopRight
+
+        local cornerBottomLeft = cornerTopLeft:Clone()
+        cornerBottomLeft.Position = UDim2.new(0, -thickness, 1, 0)
+        cornerBottomLeft.Parent = frame
+        local cornerBottomLeftGradient = UIGradient:Clone()
+        cornerBottomLeftGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        cornerBottomLeftGradient.Parent = cornerBottomLeft
+
+        local cornerBottomRight = cornerTopLeft:Clone()
+        cornerBottomRight.Position = UDim2.new(1, 0, 1, 0)
+        cornerBottomRight.Parent = frame
+        local cornerBottomRightGradient = UIGradient:Clone()
+        cornerBottomRightGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        cornerBottomRightGradient.Parent = cornerBottomRight
+    end
+end
+
+local startColor = Color3.fromRGB(244,0,161)
+local endColor = Color3.fromRGB(93, 63, 211)
+
+createOutline(Frame, 4, startColor, endColor)
+local textGradient = UIGradient:Clone()
+textGradient.Parent = TextLabel
