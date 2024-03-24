@@ -1,5 +1,5 @@
-game:GetService("RunService").Stepped:Connect(function()
-    pcall(function()
+game.Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function()
         local function spinCharacter(player)
             local character = player.Character
             if not character then
