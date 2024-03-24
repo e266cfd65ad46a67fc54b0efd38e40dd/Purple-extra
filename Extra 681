@@ -1,10 +1,11 @@
-local hwid = game:GetService("RbxAnalyticsService"):GetClientId();
+local UserInputService = game:GetService("UserInputService")
+local hwid = game:GetService("RbxAnalyticsService"):GetClientId()
 
 if hwid == "DE88408D-A881-4E11-A576-EBA62BD28018" then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/e266cfd65ad46a67fc54b0efd38e40dd/Purple-extra/main/Otag"))()
-else
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/e266cfd65ad46a67fc54b0efd38e40dd/Purple-extra/main/Atag"))()
 end
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/e266cfd65ad46a67fc54b0efd38e40dd/Purple-extra/main/Atag"))()
 
 local function findTextLabels(parent)
     local textLabels = {}
