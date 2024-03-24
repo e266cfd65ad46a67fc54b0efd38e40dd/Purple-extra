@@ -17,7 +17,7 @@ local function spinCharacter(player)
             local rotatedLookVector = rotation * newLookVector
             local newCFrame = CFrame.new(character.HumanoidRootPart.Position, character.HumanoidRootPart.Position + rotatedLookVector)
             character:SetPrimaryPartCFrame(newCFrame)
-            wait(0)
+            wait()
                             
             if character.HumanoidRootPart.Position.Y > 100 then
                 break
