@@ -44,10 +44,8 @@ while true do
         if humanoidRootPart then
             local playerPosition = humanoidRootPart.Position
             local args = {
-                {
-                    knockbackId = playerPosition,
-                    playerPosition = Vector3.new(9e9, 9e9, 9e9)
-                }
+                knockbackId = playerPosition,
+                playerPosition = Vector3.new(9e9, 9e9, 9e9)
             }
             game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("AckKnockback"):FireServer(unpack(args))
         end
