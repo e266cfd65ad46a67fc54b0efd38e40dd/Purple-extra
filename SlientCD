@@ -38,13 +38,19 @@ local player = game.Players.LocalPlayer
 spinCharacter(player)
 
 while true do
-    local playerPosition = player.Character.HumanoidRootPart.Position
-    local args = {
-        {
-            knockbackId = playerPosition,
-            playerPosition = Vector3.new(9e9, 9e9, 9e9)
-        }
-    }
-    game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("AckKnockback"):FireServer(unpack(args))
+    local character = player.Character
+    if character then
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            local playerPosition = humanoidRootPart.Position
+            local args = {
+                {
+                    knockbackId = playerPosition,
+                    playerPosition = Vector3.new(9e9, 9e9, 9e9)
+                }
+            }
+            game:GetService("ReplicatedStorage"):WaitForChild("rbxts_include"):WaitForChild("node_modules"):WaitForChild("@rbxts"):WaitForChild("net"):WaitForChild("out"):WaitForChild("_NetManaged"):WaitForChild("AckKnockback"):FireServer(unpack(args))
+        end
+    end
     wait()
 end
