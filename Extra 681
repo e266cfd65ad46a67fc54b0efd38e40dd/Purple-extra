@@ -51,26 +51,22 @@ end
 
 local vim = game:GetService("VirtualInputManager")
 local keyToClick = "L"
-
 local function PressL()
     vim:SendKeyEvent(true, keyToClick, false, game)
 end
-
 local player = game.Players.LocalPlayer
 local gui = Instance.new("ScreenGui")
 gui.ResetOnSpawn = false
 gui.Parent = player.PlayerGui
-
 local button = Instance.new("TextButton")
-button.Text = "Gui"
+button.Text = "GUI"
 button.Size = UDim2.new(0, 100, 0, 50)
 button.AnchorPoint = Vector2.new(1, 0)
 button.Position = UDim2.new(1, -120, 0, 10)
 button.Parent = gui
-button.Style = Enum.ButtonStyle.RobloxRoundDefaultButton
-button.BorderSizePixel = 0
-button.Font = Enum.Font.LuckiestGuy
-
+button.Style = Enum.ButtonStyle.Custom
+button.BackgroundTransparency = 1
+button.TextColor3 = Color3.fromRGB(148, 0, 211)
 local function AdjustButtonPosition()
     local screenSize = gui.AbsoluteSize
     local buttonSize = button.AbsoluteSize
@@ -78,17 +74,14 @@ local function AdjustButtonPosition()
     local textSize = math.min(buttonSize.X / #button.Text, buttonSize.Y)
     button.TextSize = textSize
 end
-
 local function UpdateButtonPosition()
     while true do
         AdjustButtonPosition()
-        wait(0.1)
+        wait(0.5)
     end
 end
-
 spawn(UpdateButtonPosition)
 button.Visible = true
-
 button.MouseButton1Click:Connect(function()
     PressL()
 end)
@@ -116,7 +109,7 @@ TextLabel.BorderSizePixel = 0
 TextLabel.Position = UDim2.new(0, 10, 0, 0)
 TextLabel.Size = UDim2.new(0, 360, 0, 35)
 TextLabel.Font = Enum.Font.Unknown
-TextLabel.Text = "Purple theme v-2.2 / discord.gg/MSPQHFhqxd"
+TextLabel.Text = "Purple theme v-2.3 / discord.gg/MSPQHFhqxd"
 TextLabel.TextColor3 = Color3.fromRGB(72, 0, 135)
 TextLabel.TextScaled = true
 TextLabel.TextSize = 24.000
