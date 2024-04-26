@@ -43,116 +43,180 @@ if clouds then
     clouds:Destroy()
 end
 
-local UserInputService = game:GetService("UserInputService")
-local mobile = UserInputService.TouchEnabled
-
-if mobile then
-    local vim = game:GetService("VirtualInputManager")
-    local keyToClick = "L"
-    local function PressL()
-        vim:SendKeyEvent(true, keyToClick, false, game)
-    end
-    local player = game.Players.LocalPlayer
-    local gui = Instance.new("ScreenGui")
-    gui.ResetOnSpawn = false
-    gui.Parent = player.PlayerGui
-    local button = Instance.new("TextButton")
-    button.Text = "GUI"
-    button.Size = UDim2.new(0, 100, 0, 50)
-    button.AnchorPoint = Vector2.new(1, 0)
-    button.Position = UDim2.new(1, -120, 0, 10)
-    button.Parent = gui
-    button.Style = Enum.ButtonStyle.Custom
-    button.BackgroundTransparency = 1
-    button.TextColor3 = Color3.fromRGB(148, 0, 211)
-    local function AdjustButtonPosition()
-        local screenSize = gui.AbsoluteSize
-        local buttonSize = button.AbsoluteSize
-        button.Position = UDim2.new(1, -buttonSize.X - 10, 0, 10)
-        local textSize = math.min(buttonSize.X / #button.Text, buttonSize.Y)
-        button.TextSize = textSize
-    end
-    local function UpdateButtonPosition()
-        while true do
-            AdjustButtonPosition()
-            wait(0.5)
-        end
-    end
-    spawn(UpdateButtonPosition)
-    button.Visible = true
-    button.MouseButton1Click:Connect(function()
-        PressL()
-    end)
-else
-    print("nuh uh")
+local vim = game:GetService("VirtualInputManager")
+local keyToClick = "L"
+local function PressL()
+    vim:SendKeyEvent(true, keyToClick, false, game)
 end
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+gui.ResetOnSpawn = false
+gui.Parent = player.PlayerGui
+local button = Instance.new("TextButton")
+button.Text = "GUI"
+button.Size = UDim2.new(0, 100, 0, 50)
+button.AnchorPoint = Vector2.new(1, 0)
+button.Position = UDim2.new(1, -120, 0, 10)
+button.Parent = gui
+button.Style = Enum.ButtonStyle.Custom
+button.BackgroundTransparency = 1
+button.TextColor3 = Color3.fromRGB(148, 0, 211)
+local function AdjustButtonPosition()
+    local screenSize = gui.AbsoluteSize
+    local buttonSize = button.AbsoluteSize
+    button.Position = UDim2.new(1, -buttonSize.X - 10, 0, 10)
+    local textSize = math.min(buttonSize.X / #button.Text, buttonSize.Y)
+    button.TextSize = textSize
+end
+local function UpdateButtonPosition()
+    while true do
+        AdjustButtonPosition()
+        wait(0.5)
+    end
+end
+spawn(UpdateButtonPosition)
+button.Visible = true
+button.MouseButton1Click:Connect(function()
+    PressL()
+end)
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
 local UIGradient = Instance.new("UIGradient")
 ScreenGui.ResetOnSpawn = false
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Frame.Parent = ScreenGui
 Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Frame.BackgroundTransparency = 0
+Frame.BackgroundTransparency = 1.000
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0, 10, 1, -45)
 Frame.Size = UDim2.new(0, 380, 0, 35)
 
-local function outline(frame)
-    local outline = Instance.new("Frame")
-    outline.BorderSizePixel = 0
-    outline.BackgroundTransparency = 0
-    outline.Size = UDim2.new(1, 0, 1, 0)
-    outline.BackgroundColor3 = Color3.new(1, 1, 1)
-    outline.Parent = frame
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(72, 0, 135)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0, 10, 0, 0)
+TextLabel.Size = UDim2.new(0, 360, 0, 35)
+TextLabel.Font = Enum.Font.Unknown
+TextLabel.Text = "Purple theme v-2.5 Rewrote / discord.gg/MSPQHFhqxd"
+TextLabel.TextColor3 = Color3.fromRGB(72, 0, 135)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 24.000
+TextLabel.TextWrapped = true
 
-    local gradient = UIGradient:Clone()
-    gradient.Color = ColorSequence.new{
-        ColorSequenceKeypoint.new(0, Color3.fromRGB(106, 90, 205)),
-        ColorSequenceKeypoint.new(1, Color3.fromRGB(138, 43, 226))
-    }
-    gradient.Parent = outline
+local function createOutline(frame, thickness, startColor, endColor)
+    local steps = 100
+    for i = 1, steps do
+        local color = startColor:Lerp(endColor, i / steps)
 
-    return gradient
-end
+        local outlineTop = Instance.new("Frame")
+        outlineTop.BorderSizePixel = 0
+        outlineTop.Size = UDim2.new(1, 0, 0, thickness)
+        outlineTop.BackgroundColor3 = color
+        outlineTop.Position = UDim2.new(0, 0, 0, -thickness)
+        outlineTop.Parent = frame
+        local outlineTopGradient = UIGradient:Clone()
+        outlineTopGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineTopGradient.Parent = outlineTop
 
-local gradient = outline(Frame)
+        local outlineTop = Instance.new("Frame")
+        outlineTop.BorderSizePixel = 0
+        outlineTop.Size = UDim2.new(1, 0, 0, thickness)
+        outlineTop.BackgroundColor3 = color
+        outlineTop.Position = UDim2.new(0, 0, 0, -thickness)
+        outlineTop.Parent = frame
+        local outlineTopGradient = UIGradient:Clone()
+        outlineTopGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineTopGradient.Parent = outlineTop
 
-local function ag(gradient)
-    local colors = {
-        Color3.fromRGB(106, 90, 205),
-        Color3.fromRGB(138, 43, 226)
-    }
-    local colorIndex = 1
+        local outlineBottom = outlineTop:Clone()
+        outlineBottom.Position = UDim2.new(0, 0, 1, 0)
+        outlineBottom.Parent = frame
+        local outlineBottomGradient = UIGradient:Clone()
+        outlineBottomGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineBottomGradient.Parent = outlineBottom
 
-    while true do
-        local currentColor = colors[colorIndex]
-        local nextColorIndex = colorIndex % #colors + 1
-        local nextColor = colors[nextColorIndex]
+        local outlineLeft = outlineTop:Clone()
+        outlineLeft.Size = UDim2.new(0, thickness, 1, 0)
+        outlineLeft.Position = UDim2.new(0, -thickness, 0, 0)
+        outlineLeft.Parent = frame
+        local outlineLeftGradient = UIGradient:Clone()
+        outlineLeftGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineLeftGradient.Parent = outlineLeft
 
-        for t = 0, 1, 0.01 do
-            local lerpedColor = currentColor:Lerp(nextColor, t)
-            gradient.Color = ColorSequence.new(lerpedColor)
-            wait(0.08)
-        end
+        local outlineRight = outlineLeft:Clone()
+        outlineRight.Position = UDim2.new(1, 0, 0, 0)
+        outlineRight.Parent = frame
+        local outlineRightGradient = UIGradient:Clone()
+        outlineRightGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        outlineRightGradient.Parent = outlineRight
 
-        colorIndex = nextColorIndex
+        local cornerTopLeft = outlineTop:Clone()
+        cornerTopLeft.Size = UDim2.new(0, thickness, 0, thickness)
+        cornerTopLeft.Position = UDim2.new(0, -thickness, 0, -thickness)
+        cornerTopLeft.Parent = frame
+        local cornerTopLeftGradient = UIGradient:Clone()
+        cornerTopLeftGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        cornerTopLeftGradient.Parent = cornerTopLeft
+
+        local cornerTopRight = cornerTopLeft:Clone()
+        cornerTopRight.Position = UDim2.new(1, 0, 0, -thickness)
+        cornerTopRight.Parent = frame
+        local cornerTopRightGradient = UIGradient:Clone()
+        cornerTopRightGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        cornerTopRightGradient.Parent = cornerTopRight
+
+        local cornerBottomLeft = cornerTopLeft:Clone()
+        cornerBottomLeft.Position = UDim2.new(0, -thickness, 1, 0)
+        cornerBottomLeft.Parent = frame
+        local cornerBottomLeftGradient = UIGradient:Clone()
+        cornerBottomLeftGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        cornerBottomLeftGradient.Parent = cornerBottomLeft
+
+        local cornerBottomRight = cornerTopLeft:Clone()
+        cornerBottomRight.Position = UDim2.new(1, 0, 1, 0)
+        cornerBottomRight.Parent = frame
+        local cornerBottomRightGradient = UIGradient:Clone()
+        cornerBottomRightGradient.Color = ColorSequence.new{
+            ColorSequenceKeypoint.new(0, startColor),
+            ColorSequenceKeypoint.new(1, endColor)
+        }
+        cornerBottomRightGradient.Parent = cornerBottomRight
     end
 end
 
-local gradient = outline(Frame)
+local startColor = Color3.fromRGB(244,0,161)
+local endColor = Color3.fromRGB(93, 63, 211)
 
-local ScreenGui = Instance.new("ScreenGui")
-local TextLabel = Instance.new("TextLabel")
-TextLabel.Parent = Frame
-TextLabel.Size = UDim2.new(1, 0, 1, 0)
-TextLabel.BackgroundTransparency = 1 
-TextLabel.Text = "Purple theme V3.0"
-TextLabel.TextColor3 = Color3.fromRGB(201, 160, 255)
-TextLabel.Font = Enum.Font.SourceSansBold
-TextLabel.TextSize = 24
-
-ag(gradient)
+createOutline(Frame, 4, startColor, endColor)
+local textGradient = UIGradient:Clone()
+textGradient.Parent = TextLabel
