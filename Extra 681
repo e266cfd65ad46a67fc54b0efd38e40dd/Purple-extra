@@ -46,7 +46,7 @@ end
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local UIGradient = Instance.new("UIGradient")
-ScreenGui.ResetOnSpawn = false
+ScreenGui.ResetOnSpawn = true
 
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Frame.Parent = ScreenGui
@@ -57,10 +57,10 @@ Frame.BorderSizePixel = 0
 Frame.Position = UDim2.new(0, 10, 1, -45)
 Frame.Size = UDim2.new(0, 380, 0, 35)
 
-local function outline(frame)
+local function cgo(frame)
     local outline = Instance.new("Frame")
     outline.BorderSizePixel = 0
-    outline.BackgroundTransparency = 1
+    outline.BackgroundTransparency = 0
     outline.Size = UDim2.new(1, 0, 1, 0)
     outline.BackgroundColor3 = Color3.new(1, 1, 1)
     outline.Parent = frame
@@ -75,7 +75,7 @@ local function outline(frame)
     return gradient
 end
 
-local gradient = outline(Frame)
+local gradient = cgo(Frame)
 
 local function ag(gradient)
     local colors = {
@@ -91,7 +91,7 @@ local function ag(gradient)
 
         for t = 0, 1, 0.01 do
             local lerpedColor = currentColor:Lerp(nextColor, t)
-            gradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0, lerpedColor)}
+            gradient.Color = ColorSequence.new(lerpedColor)
             wait(0.08)
         end
 
@@ -99,8 +99,9 @@ local function ag(gradient)
     end
 end
 
-local gradient = outline(Frame)
+local gradient = cgo(Frame)
 
+local ScreenGui = Instance.new("ScreenGui")
 local TextLabel = Instance.new("TextLabel")
 TextLabel.Parent = Frame
 TextLabel.Size = UDim2.new(1, 0, 1, 0)
