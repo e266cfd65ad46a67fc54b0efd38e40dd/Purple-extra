@@ -26,7 +26,6 @@ if spectatorPlatform then
         if twitter then
             local billboardGui = twitter:FindFirstChild("BillboardGui")
             if billboardGui then
-
                 local textLabels = findTextLabels(billboardGui)
                 for _, label in ipairs(textLabels) do
                     if label.Text == "@RobloxBedWars" then
@@ -35,9 +34,9 @@ if spectatorPlatform then
                         label.Text = "Join Purple theme discord server"
                     end
                 end
-			end
-		end
-	end
+            end
+        end
+    end
 end
 if clouds then
     clouds:Destroy()
@@ -101,7 +100,6 @@ end
 
 local gradient = cgo(Frame)
 
-local ScreenGui = Instance.new("ScreenGui")
 local TextLabel = Instance.new("TextLabel")
 TextLabel.Parent = Frame
 TextLabel.Size = UDim2.new(1, 0, 1, 0)
