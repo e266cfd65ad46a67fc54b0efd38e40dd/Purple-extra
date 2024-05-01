@@ -1,7 +1,7 @@
 local UserInputService = game:GetService("UserInputService")
 local hwid = game:GetService("RbxAnalyticsService"):GetClientId()
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/e266cfd65ad46a67fc54b0efd38e40dd/Purple-extra/main/Atag"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/e266cfd65ad46a67fc54b0efd38e40dd/andromida-extra/main/Atag"))()
 
 local function findTextLabels(parent)
     local textLabels = {}
@@ -34,7 +34,7 @@ if spectatorPlatform then
                     if label.Text == "@RobloxBedWars" then
                         label.Text = "discord.gg/MSPQHFhqxd"
                     elseif label.Text == "Follow us on twitter!" then
-                        label.Text = "Join Purple theme discord server"
+                        label.Text = "Join andromida discord server"
                     end
                 end
 			end
