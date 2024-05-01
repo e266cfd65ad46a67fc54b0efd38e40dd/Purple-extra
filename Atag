@@ -6,7 +6,7 @@ local chatTags = {}
 local function Tag()
     local localPlayerName = Players.LocalPlayer.Name
     chatTags[localPlayerName] = {
-        TagText = "Purple theme user",
+        TagText = "andromida user",
         TagColor = Color3.fromRGB(75, 0, 130)
     }
 end
